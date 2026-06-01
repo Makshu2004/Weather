@@ -1,3 +1,5 @@
+
+
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import "./SearchBox.css"
@@ -8,12 +10,12 @@ export default function SearchBox({updateinfo}){
      let [error,setError]=useState(false);
  
 
-    const API_URL="https://api.openweathermap.org/data/2.5/weather"
-    const ApI_Key="a1a4a041748031baf03fd92191b2e545"
+    const API_URL=import.meta.env.VITE_API_URL;
+    const API_KEY=import.meta.env.VITE_API_KEY;
 
     let getweather=async()=>{
      try{
-       let response= await fetch(`${API_URL}?q=${city}&appid=${ApI_Key}&units=metric`)
+       let response= await fetch(`${API_URL}?q=${city}&appid=${API_KEY}&units=metric`)
        let jsonresponse=await response.json();
        
        let result={
@@ -35,8 +37,9 @@ export default function SearchBox({updateinfo}){
  
    
     let handel=(event)=>{
-       setCity(event.target.value);
        setError(false);
+       setCity(event.target.value);
+      
     }
   
     let handelSubmit= async(evt)=>{
